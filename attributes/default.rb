@@ -22,7 +22,9 @@
 
 default['maven']['version'] = 2
 default['maven']['m2_home'] = '/usr/local/maven'
-default['maven']['repository_root'] = '/usr/local'
+default['maven']['repository_root'] = '/usr/local/m2/repository'
+default['maven']['repository_mode'] = 00777
+default['maven']['repository_owner'] = 'root'
 default['maven']['2']['version'] = "2.2.1"
 default['maven']['2']['url'] = "http://apache.mirrors.tds.net/maven/maven-2/#{node['maven']['2']['version']}/binaries/apache-maven-#{node['maven']['2']['version']}-bin.tar.gz"
 default['maven']['2']['checksum'] = "b9a36559486a862abfc7fb2064fd1429f20333caae95ac51215d06d72c02d376"

@@ -20,20 +20,23 @@
 # limitations under the License.
 #
 
-include_recipe "java"
-include_recipe "ark"
+include_recipe 'java'
+include_recipe 'ark'
 
 mvn_version = node['maven']['version'].to_s
 
-ark "maven" do
+ark 'maven' do
   url node['maven'][mvn_version]['url']
   checksum node['maven'][mvn_version]['checksum']
   home_dir node['maven']['m2_home']
   version node['maven'][mvn_version]['version']
   append_env_path true
+  template_cookbook 'maven'
 end
 
-template "/etc/mavenrc" do
-  source "mavenrc.erb"
-  mode 00755
+# create the repository root if it doesn't exist
+Directory node[:maven][:repository_root] do
+  not_if do ::File.exist?(node[:maven][:repository_root]) end
+  mode node[:maven][:repository_mode]
+  owner node[:maven][:repository_owner]
 end
