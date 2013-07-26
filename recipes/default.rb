@@ -39,4 +39,5 @@ Directory node[:maven][:repository_root] do
   not_if do ::File.exist?(node[:maven][:repository_root]) end
   mode node[:maven][:repository_mode]
   owner node[:maven][:repository_owner]
+  recursive true
 end
